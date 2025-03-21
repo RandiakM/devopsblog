@@ -11,7 +11,7 @@ import About from "@/pages/about";
 import NotFound from "@/pages/not-found";
 
 // Get base path from environment variable or use empty string for local development
-const basePath = import.meta.env.VITE_BASE_URL || '';
+const basePath = import.meta.env.VITE_BASE_URL || '/devopsblog';
 
 function Router() {
   return (
