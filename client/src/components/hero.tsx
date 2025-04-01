@@ -7,10 +7,10 @@ export function Hero() {
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
             Exploring the Frontiers of{" "}
-            <span className="text-primary">Artificial Intelligence</span>
+            <span className="text-primary">Cloud Technologies</span>
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Deep insights into AI, GenAI, Computer Vision, and Deep Learning advancements.
+            Deep insights into SRE, DevOps, Cloud Automation, and Reliability Engineering advancements.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Button size="lg">Latest Articles</Button>

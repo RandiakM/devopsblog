@@ -10,10 +10,10 @@ export interface Article {
 export const featuredArticles: Article[] = [
   {
     id: 1,
-    title: "The Evolution of Generative Adversarial Networks: From GAN to StyleGAN-3",
-    excerpt: "Explore the evolution of GANs starting from Ian Goodfellow's original paper to NVIDIA's StyleGAN-3 and the latest achievements in generative AI.",
-    category: "AI Research",
-    date: "May 15, 2023",
+    title: "Configuring AWS WAF, CloudFront, and S3 Bucket for Secure Access",
+    excerpt: "How to Set Up AWS WAF, CloudFront and an S3 Bucket to serve content securely and Restrict content Access to certain originating sources only. This guide looks at some issues, for instance, 403 Forbidden, in order to troubleshoot the problem.",
+    category: "Serverless",
+    date: "January 7, 2025",
     image: "https://images.unsplash.com/photo-1655393001768-d946c97d6fd1"
   },
   {
