@@ -15,7 +15,7 @@ export function Newsletter() {
 
   return (
     <section className="py-16 bg-muted">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold mb-4">
             Stay Updated
