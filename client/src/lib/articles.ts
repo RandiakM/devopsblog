@@ -26,7 +26,7 @@ export const featuredArticles: Article[] = [
     excerpt: "Discover how generative AI has integrated into everyday activities in 2025, powering personal AI assistants, tech tools, translating...",
     category: "Future Tech",
     date: "June 2, 2023",
-    image: "https://randiakm.github.io/devopsblog/client/public/images/ai-future.jpg",
+    image: "/devopsblog/images/ai-future.jpg",
     url: "/article/ai-in-2025",
     slug: "ai-in-2025"
   },
