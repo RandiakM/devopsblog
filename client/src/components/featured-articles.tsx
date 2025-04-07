@@ -1,5 +1,6 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { featuredArticles } from "@/lib/articles";
+import { Link } from "wouter";
 
 export function FeaturedArticles() {
   return (
@@ -8,11 +9,9 @@ export function FeaturedArticles() {
         <h2 className="text-3xl font-bold mb-8">Featured Articles</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {featuredArticles.map((article) => (
-            <a 
+            <Link 
               key={article.id} 
               href={article.url} 
-              target="_blank" 
-              rel="noopener noreferrer" 
               className="block group"
             >
               <Card className="group hover:border-primary/50 transition-colors bg-[#0F172A] h-full">
@@ -41,7 +40,7 @@ export function FeaturedArticles() {
                   </div>
                 </CardFooter>
               </Card>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

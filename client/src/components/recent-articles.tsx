@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { recentArticles } from "@/lib/articles";
+import { Link } from "wouter";
 
 export function RecentArticles() {
   return (
@@ -8,11 +9,9 @@ export function RecentArticles() {
         <h2 className="text-3xl font-bold mb-8">Recent Articles</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {recentArticles.map((article) => (
-            <a 
+            <Link 
               key={article.id} 
               href={article.url} 
-              target="_blank" 
-              rel="noopener noreferrer" 
               className="block group"
             >
               <Card className="group hover:border-primary/50 transition-colors bg-[#0F172A] h-full">
@@ -39,7 +38,7 @@ export function RecentArticles() {
                   </div>
                 </CardContent>
               </Card>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
