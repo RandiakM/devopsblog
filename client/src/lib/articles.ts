@@ -6,7 +6,6 @@ export interface Article {
   date: string;
   image: string;
   url: string;
-  slug?: string; // Added for markdown file reference
 }
 
 export const featuredArticles: Article[] = [
@@ -16,9 +15,8 @@ export const featuredArticles: Article[] = [
     excerpt: "Explore the evolution of GANs starting from Ian Goodfellow's original paper to NVIDIA's StyleGAN-3 and the latest achievements in generative AI.",
     category: "AI Research",
     date: "May 15, 2023",
-    image: "/images/gan-evolution.jpg",
-    url: "/article/evolution-of-gans",
-    slug: "evolution-of-gans"
+    image: "/static/images/blog/gans-evolution.jpg",
+    url: "https://neuralpulse.ai/articles/evolution-of-gans"
   },
   {
     id: 2,
@@ -26,9 +24,8 @@ export const featuredArticles: Article[] = [
     excerpt: "Discover how generative AI has integrated into everyday activities in 2025, powering personal AI assistants, tech tools, translating...",
     category: "Future Tech",
     date: "June 2, 2023",
-    image: "/images/ai-future.jpg",
-    url: "/article/ai-in-2025",
-    slug: "ai-in-2025"
+    image: "/static/images/blog/ai-2025.jpg",
+    url: "https://neuralpulse.ai/articles/ai-in-2025"
   },
   {
     id: 3,
@@ -36,9 +33,8 @@ export const featuredArticles: Article[] = [
     excerpt: "Explore the emergence of multimodal AI models that combine text, image, and video understanding for more comprehensive AI applications.",
     category: "AI Models",
     date: "June 15, 2023",
-    image: "/images/multimodal-ai.jpg",
-    url: "/article/multimodal-ai-models",
-    slug: "multimodal-ai-models"
+    image: "/static/images/blog/multimodal-ai.jpg",
+    url: "https://neuralpulse.ai/articles/multimodal-ai-models"
   }
 ];
 
@@ -49,9 +45,8 @@ export const recentArticles: Article[] = [
     excerpt: "Learn how AI is revolutionizing 3D modeling and virtual world creation, enabling creators to build immersive virtual worlds...",
     category: "3D & Virtual Worlds",
     date: "July 1, 2023",
-    image: "/images/placeholder.svg",
-    url: "/article/ai-driven-3d-modeling",
-    slug: "ai-driven-3d-modeling"
+    image: "/static/images/blog/3d-modeling.jpg",
+    url: "https://neuralpulse.ai/articles/ai-driven-3d-modeling"
   },
   {
     id: 5,
@@ -59,9 +54,8 @@ export const recentArticles: Article[] = [
     excerpt: "Delve into the incorporation of AI into wearable devices, such as smart glasses, smart watches, and integration through...",
     category: "Wearable Tech",
     date: "July 5, 2023",
-    image: "/images/placeholder.svg",
-    url: "/article/ai-wearable-tech",
-    slug: "ai-wearable-tech"
+    image: "/static/images/blog/wearable-tech.jpg",
+    url: "https://neuralpulse.ai/articles/ai-wearable-tech"
   },
   {
     id: 6,
@@ -69,9 +63,8 @@ export const recentArticles: Article[] = [
     excerpt: "Analyzing how computer vision algorithms are working with sensors to help autonomous vehicles navigate complex environments.",
     category: "Computer Vision",
     date: "July 8, 2023",
-    image: "/images/autonomous-vehicles.jpg",
-    url: "/article/computer-vision-autonomous-vehicles",
-    slug: "computer-vision-autonomous-vehicles"
+    image: "/static/images/blog/computer-vision.jpg",
+    url: "https://neuralpulse.ai/articles/computer-vision-autonomous-vehicles"
   },
   {
     id: 7,
@@ -79,9 +72,8 @@ export const recentArticles: Article[] = [
     excerpt: "Deep transformer models have transformed our ability to understand and generate human language.",
     category: "Deep Learning",
     date: "July 10, 2023",
-    image: "/images/placeholder.svg",
-    url: "/article/deep-learning-nlp",
-    slug: "deep-learning-nlp"
+    image: "/static/images/blog/nlp.jpg",
+    url: "https://neuralpulse.ai/articles/deep-learning-nlp"
   },
   {
     id: 8,
@@ -89,9 +81,8 @@ export const recentArticles: Article[] = [
     excerpt: "Examining the ethical implications of AI generated content and implications.",
     category: "AI Ethics",
     date: "July 12, 2023",
-    image: "/images/ai-ethics.jpg",
-    url: "/article/ethical-generative-ai",
-    slug: "ethical-generative-ai"
+    image: "/static/images/blog/ethics.jpg",
+    url: "https://neuralpulse.ai/articles/ethical-generative-ai"
   },
   {
     id: 9,
@@ -99,8 +90,7 @@ export const recentArticles: Article[] = [
     excerpt: "Predictions and insights into the next frontiers of artificial intelligence and breakthroughs.",
     category: "Future of AI",
     date: "July 15, 2023",
-    image: "/images/placeholder.svg",
-    url: "/article/future-of-ai-research",
-    slug: "future-of-ai-research"
+    image: "/static/images/blog/future-ai.jpg",
+    url: "https://neuralpulse.ai/articles/future-of-ai-research"
   }
 ];

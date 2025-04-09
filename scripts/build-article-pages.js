@@ -10,10 +10,14 @@ const __dirname = path.dirname(__filename);
 // Directory paths
 const contentDir = path.join(__dirname, '..', 'content', 'posts');
 const outputDir = path.join(__dirname, '..', 'public', 'articles');
+const articleDir = path.join(__dirname, '..', 'public', 'article');
 
-// Ensure output directory exists
+// Ensure output directories exist
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
+}
+if (!fs.existsSync(articleDir)) {
+  fs.mkdirSync(articleDir, { recursive: true });
 }
 
 // HTML template for article pages
@@ -71,20 +75,28 @@ function generateArticlePages() {
       
       // Create HTML file with embedded data
       const articleHtml = articleTemplate(slug, post, content);
-      const articleDir = path.join(outputDir, slug);
       
-      // Create directory for the article
-      if (!fs.existsSync(articleDir)) {
-        fs.mkdirSync(articleDir, { recursive: true });
+      // Generate file in /articles/[slug]/index.html (plural)
+      const articlesDir = path.join(outputDir, slug);
+      if (!fs.existsSync(articlesDir)) {
+        fs.mkdirSync(articlesDir, { recursive: true });
       }
-      
-      // Write index.html to the article directory
       fs.writeFileSync(
-        path.join(articleDir, 'index.html'),
+        path.join(articlesDir, 'index.html'),
         articleHtml
       );
-      
       console.log(`Generated: /articles/${slug}/index.html`);
+      
+      // Generate file in /article/[slug]/index.html (singular - the one user tried to access)
+      const singleArticleDir = path.join(articleDir, slug);
+      if (!fs.existsSync(singleArticleDir)) {
+        fs.mkdirSync(singleArticleDir, { recursive: true });
+      }
+      fs.writeFileSync(
+        path.join(singleArticleDir, 'index.html'),
+        articleHtml
+      );
+      console.log(`Generated: /article/${slug}/index.html`);
     });
     
     console.log('Article page generation complete!');

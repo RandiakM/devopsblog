@@ -15,15 +15,3 @@ export const insertUserSchema = createInsertSchema(users).pick({
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
-
-// Article interface for blog posts
-export interface Article {
-  id: number;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  image: string;
-  url: string;
-  slug?: string; // Slug for URL and markdown file reference
-}
