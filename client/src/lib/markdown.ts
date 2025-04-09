@@ -7,7 +7,6 @@ const contentCache: Record<string, {post: Article, content: string}> = {};
 // Helper function to determine if we're running on GitHub Pages
 function isGitHubPages(): boolean {
   // Check if we're in a GitHub Pages environment
-  // This is a heuristic - if we're on a .github.io domain or have a specific path pattern
   if (typeof window !== 'undefined') {
     return window.location.hostname.endsWith('github.io') || 
            window.location.pathname.startsWith('/devopsblog') ||
@@ -16,17 +15,19 @@ function isGitHubPages(): boolean {
   return false;
 }
 
-// Get base path for GitHub Pages
-function getBasePath(): string {
+// Get static file path based on environment
+function getStaticFilePath(file: string): string {
   if (isGitHubPages()) {
-    // Extract repo name from path if on GitHub Pages
-    // This works for URLs like https://username.github.io/repo-name/
+    // Get the repo name from the pathname
     const pathParts = window.location.pathname.split('/');
-    if (pathParts.length > 1) {
-      return `/${pathParts[1]}`;
-    }
+    const repoName = pathParts.length > 1 ? pathParts[1] : '';
+    
+    // For GitHub Pages deployment
+    return repoName ? `/${repoName}/${file}` : `/${file}`;
   }
-  return '';
+  
+  // For local development
+  return `/${file}`;
 }
 
 // Get all posts (for listing purposes)
@@ -35,19 +36,25 @@ export async function getAllPosts(): Promise<Article[]> {
     let posts;
     
     if (isGitHubPages()) {
-      // For GitHub Pages, use the static JSON file with the correct base path
-      const basePath = getBasePath();
-      const response = await axios.get(`${basePath}/data/posts.json`);
-      posts = response.data;
+      // For GitHub Pages, use the static JSON file
+      const filePath = getStaticFilePath('data/posts.json');
+      try {
+        const response = await axios.get(filePath);
+        posts = response.data;
+        return posts;
+      } catch (error) {
+        console.error(`Failed to load posts from ${filePath}:`, error);
+        throw error; // Let the outer catch handle this
+      }
     } else {
       // For development, use the API
       const response = await axios.get('/api/posts');
       posts = response.data;
+      return posts;
     }
-    
-    return posts;
   } catch (error) {
-    console.error('Error fetching all posts:', error);
+    console.error('Error fetching all posts, falling back to static data:', error);
+    
     // Fallback to our static lists if the API fails
     const allArticles = [...featuredArticles, ...recentArticles];
     const uniqueArticles = Array.from(new Map(allArticles.map(item => [item.id, item])).values());
@@ -75,12 +82,19 @@ export async function getPostBySlug(slug: string): Promise<{ post: Article | nul
     let post, content;
     
     if (isGitHubPages()) {
-      // For GitHub Pages, use the static JSON files with correct base path
-      const basePath = getBasePath();
-      const response = await axios.get(`${basePath}/data/${slug}.json`);
-      const data = response.data;
-      post = data.post;
-      content = data.content;
+      // For GitHub Pages, use the static JSON files
+      const filePath = getStaticFilePath(`data/${slug}.json`);
+      
+      try {
+        console.log(`Trying to load article data from: ${filePath}`);
+        const response = await axios.get(filePath);
+        const data = response.data;
+        post = data.post;
+        content = data.content;
+      } catch (fetchError) {
+        console.error(`Failed to load article from ${filePath}:`, fetchError);
+        throw fetchError; // Let the outer catch handle it
+      }
     } else {
       // For development, use the API
       const response = await axios.get(`/api/posts/${slug}`);
@@ -93,25 +107,33 @@ export async function getPostBySlug(slug: string): Promise<{ post: Article | nul
     
     return { post, content };
   } catch (error) {
-    console.error(`Error fetching post ${slug}:`, error);
+    console.error(`Error fetching post ${slug}, trying fallback:`, error);
     
-    // Final fallback to static content
-    const allArticles = [...featuredArticles, ...recentArticles];
-    const staticPost = allArticles.find(article => article.url === `/article/${slug}`) || null;
-    
-    if (staticPost) {
-      try {
-        // Try to load from static JSON files with correct base path
-        const basePath = getBasePath();
-        const response = await axios.get(`${basePath}/data/${slug}.json`);
-        const staticContent = response.data.content;
-        return { post: staticPost, content: staticContent };
-      } catch (e) {
-        console.error(`Could not load static content for ${slug}:`, e);
-        return { post: staticPost, content: 'Content unavailable.' };
+    // Fallback to static data
+    try {
+      const allArticles = [...featuredArticles, ...recentArticles];
+      const staticPost = allArticles.find(article => {
+        const articleSlug = article.url.split('/').pop();
+        return articleSlug === slug;
+      });
+      
+      if (staticPost) {
+        // Try again with the static JSON file with a different approach
+        try {
+          const filePath = getStaticFilePath(`data/${slug}.json`);
+          console.log(`Trying fallback path: ${filePath}`);
+          const response = await axios.get(filePath);
+          const staticContent = response.data.content;
+          return { post: staticPost, content: staticContent };
+        } catch (e) {
+          console.error(`Final fallback failed for ${slug}:`, e);
+          return { post: staticPost, content: 'Content unavailable - please try accessing from the homepage.' };
+        }
       }
+    } catch (fallbackError) {
+      console.error('Fallback error:', fallbackError);
     }
     
-    return { post: null, content: '' };
+    return { post: null, content: 'Article not found. Please return to the homepage.' };
   }
 }

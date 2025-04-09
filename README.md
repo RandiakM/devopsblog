@@ -75,6 +75,19 @@ To use a custom domain:
 
 If articles are not showing up on GitHub Pages:
 
-1. Make sure the content generation script ran successfully during build
+1. Make sure the content generation scripts ran successfully during build
 2. Check the network tab in browser dev tools for 404 errors when fetching JSON files
-3. Ensure your repository name is correctly set in the `isGitHubPages()` function in `client/src/lib/markdown.ts`
+3. For direct article links, we've implemented a special solution:
+   - Static HTML files at `/articles/[slug]/index.html` automatically store article data in localStorage
+   - This data is then picked up by the React app when it loads
+   - Example: Direct link to `https://username.github.io/devopsblog/articles/evolution-of-gans/`
+     will redirect to the main app with data preloaded
+
+### How Article Pages Work on GitHub Pages
+
+The blog has a special system for handling direct article links on GitHub Pages:
+
+1. Static HTML files are generated for each article in the `/articles/[slug]/` directory
+2. These HTML files store the article content in localStorage then redirect to the main app
+3. When the React app loads, it checks localStorage for pre-loaded article data
+4. This approach solves the GitHub Pages routing limitations without requiring a server

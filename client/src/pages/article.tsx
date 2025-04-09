@@ -20,10 +20,37 @@ export default function ArticlePage() {
       
       if (params?.slug) {
         try {
+          // First, check if we have preloaded article data in localStorage
+          // This is how we'll handle GitHub Pages article routing
+          const localData = localStorage.getItem(`article_${params.slug}`);
+          
+          if (localData) {
+            // If we have local data, use it
+            console.log('Using preloaded article data from localStorage');
+            try {
+              const { post, content } = JSON.parse(localData);
+              setArticle(post);
+              setContent(content);
+              setLoading(false);
+              return;
+            } catch (parseError) {
+              console.error('Error parsing local article data:', parseError);
+              // Continue to regular fetching if parsing fails
+            }
+          }
+          
           // Get the article and content from our markdown library
           const { post, content } = await getPostBySlug(params.slug);
           setArticle(post);
           setContent(content);
+          
+          // Store in localStorage for future visits
+          try {
+            localStorage.setItem(`article_${params.slug}`, JSON.stringify({ post, content }));
+          } catch (storageError) {
+            console.warn('Could not cache article data:', storageError);
+          }
+          
           setLoading(false);
         } catch (error) {
           console.error('Error fetching article:', error);
