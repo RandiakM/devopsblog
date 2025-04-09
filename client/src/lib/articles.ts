@@ -11,12 +11,12 @@ export interface Article {
 export const featuredArticles: Article[] = [
   {
     id: 1,
-    title: "The Evolution of Generative Adversarial Networks: From GAN to StyleGAN-3",
-    excerpt: "Explore the evolution of GANs starting from Ian Goodfellow's original paper to NVIDIA's StyleGAN-3 and the latest achievements in generative AI.",
-    category: "AI Research",
-    date: "May 15, 2023",
-    image: "/static/images/blog/gans-evolution.jpg",
-    url: "https://neuralpulse.ai/articles/evolution-of-gans"
+    title: "Configuring AWS WAF, CloudFront, and S3 Bucket for Secure Access",
+    excerpt: "How to Set Up AWS WAF, CloudFront and an S3 Bucket to serve content securely and Restrict content Access to certain originating sources only. This guide looks at some issues, for instance, 403 Forbidden, in order to troubleshoot the problem.",
+    category: "WAF & CloudFront",
+    date: "January 7, 2027",
+    image: "/devopsblog/static/images/blog/waf-cloudfront-secure.png",
+    url: "https://dev.to/randiakm/configuring-aws-waf-cloudfront-and-s3-bucket-for-secure-access-24a3"
   },
   {
     id: 2,
