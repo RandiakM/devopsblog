@@ -11,8 +11,30 @@ import About from "@/pages/about";
 import Article from "@/pages/article"; // Import the new Article page
 import NotFound from "@/pages/not-found";
 
-// Get base path from environment variable or use empty string for local development
-const basePath = import.meta.env.VITE_BASE_URL || '/devopsblog';
+// Helper function to determine if we're running on GitHub Pages
+function isGitHubPages(): boolean {
+  if (typeof window !== 'undefined') {
+    return window.location.hostname.endsWith('github.io') || 
+           window.location.pathname.startsWith('/devopsblog') ||
+           process.env.NODE_ENV === 'production';
+  }
+  return false;
+}
+
+// Get base path from environment variable or use GitHub Pages repo name in production
+const getBasePath = (): string => {
+  if (isGitHubPages()) {
+    // Extract repo name from path if on GitHub Pages
+    // This works for URLs like https://username.github.io/repo-name/
+    const pathParts = window.location.pathname.split('/');
+    if (pathParts.length > 1) {
+      return `/${pathParts[1]}`;
+    }
+  }
+  return import.meta.env.VITE_BASE_URL || '';
+};
+
+const basePath = getBasePath();
 
 function Router() {
   return (

@@ -10,10 +10,23 @@ function isGitHubPages(): boolean {
   // This is a heuristic - if we're on a .github.io domain or have a specific path pattern
   if (typeof window !== 'undefined') {
     return window.location.hostname.endsWith('github.io') || 
-           window.location.pathname.startsWith('/neuralpulse') ||
+           window.location.pathname.startsWith('/devopsblog') ||
            process.env.NODE_ENV === 'production';
   }
   return false;
+}
+
+// Get base path for GitHub Pages
+function getBasePath(): string {
+  if (isGitHubPages()) {
+    // Extract repo name from path if on GitHub Pages
+    // This works for URLs like https://username.github.io/repo-name/
+    const pathParts = window.location.pathname.split('/');
+    if (pathParts.length > 1) {
+      return `/${pathParts[1]}`;
+    }
+  }
+  return '';
 }
 
 // Get all posts (for listing purposes)
@@ -22,8 +35,9 @@ export async function getAllPosts(): Promise<Article[]> {
     let posts;
     
     if (isGitHubPages()) {
-      // For GitHub Pages, use the static JSON file
-      const response = await axios.get('/data/posts.json');
+      // For GitHub Pages, use the static JSON file with the correct base path
+      const basePath = getBasePath();
+      const response = await axios.get(`${basePath}/data/posts.json`);
       posts = response.data;
     } else {
       // For development, use the API
@@ -61,8 +75,9 @@ export async function getPostBySlug(slug: string): Promise<{ post: Article | nul
     let post, content;
     
     if (isGitHubPages()) {
-      // For GitHub Pages, use the static JSON files
-      const response = await axios.get(`/data/${slug}.json`);
+      // For GitHub Pages, use the static JSON files with correct base path
+      const basePath = getBasePath();
+      const response = await axios.get(`${basePath}/data/${slug}.json`);
       const data = response.data;
       post = data.post;
       content = data.content;
@@ -86,8 +101,9 @@ export async function getPostBySlug(slug: string): Promise<{ post: Article | nul
     
     if (staticPost) {
       try {
-        // Try to load from static JSON files
-        const response = await axios.get(`/data/${slug}.json`);
+        // Try to load from static JSON files with correct base path
+        const basePath = getBasePath();
+        const response = await axios.get(`${basePath}/data/${slug}.json`);
         const staticContent = response.data.content;
         return { post: staticPost, content: staticContent };
       } catch (e) {
