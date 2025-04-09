@@ -4,12 +4,33 @@ import axios from 'axios';
 // Cache for loaded markdown content to avoid repeated fetches
 const contentCache: Record<string, {post: Article, content: string}> = {};
 
+// Helper function to determine if we're running on GitHub Pages
+function isGitHubPages(): boolean {
+  // Check if we're in a GitHub Pages environment
+  // This is a heuristic - if we're on a .github.io domain or have a specific path pattern
+  if (typeof window !== 'undefined') {
+    return window.location.hostname.endsWith('github.io') || 
+           window.location.pathname.startsWith('/neuralpulse') ||
+           process.env.NODE_ENV === 'production';
+  }
+  return false;
+}
+
 // Get all posts (for listing purposes)
 export async function getAllPosts(): Promise<Article[]> {
   try {
-    // Fetch the list of available markdown files
-    const response = await axios.get('/api/posts');
-    const posts = response.data;
+    let posts;
+    
+    if (isGitHubPages()) {
+      // For GitHub Pages, use the static JSON file
+      const response = await axios.get('/data/posts.json');
+      posts = response.data;
+    } else {
+      // For development, use the API
+      const response = await axios.get('/api/posts');
+      posts = response.data;
+    }
+    
     return posts;
   } catch (error) {
     console.error('Error fetching all posts:', error);
@@ -37,9 +58,20 @@ export async function getPostBySlug(slug: string): Promise<{ post: Article | nul
       };
     }
     
-    // Fetch the post data and content from our API endpoint
-    const response = await axios.get(`/api/posts/${slug}`);
-    const { post, content } = response.data;
+    let post, content;
+    
+    if (isGitHubPages()) {
+      // For GitHub Pages, use the static JSON files
+      const response = await axios.get(`/data/${slug}.json`);
+      const data = response.data;
+      post = data.post;
+      content = data.content;
+    } else {
+      // For development, use the API
+      const response = await axios.get(`/api/posts/${slug}`);
+      post = response.data.post;
+      content = response.data.content;
+    }
     
     // Cache the post and content for future use
     contentCache[slug] = { post, content };
@@ -48,14 +80,20 @@ export async function getPostBySlug(slug: string): Promise<{ post: Article | nul
   } catch (error) {
     console.error(`Error fetching post ${slug}:`, error);
     
-    // Fallback to our static content if an article with the same URL exists
+    // Final fallback to static content
     const allArticles = [...featuredArticles, ...recentArticles];
     const staticPost = allArticles.find(article => article.url === `/article/${slug}`) || null;
     
     if (staticPost) {
-      // Find content in our static content if available
-      const staticContent = ''; // We don't have static content anymore as we fetch from files
-      return { post: staticPost, content: staticContent };
+      try {
+        // Try to load from static JSON files
+        const response = await axios.get(`/data/${slug}.json`);
+        const staticContent = response.data.content;
+        return { post: staticPost, content: staticContent };
+      } catch (e) {
+        console.error(`Could not load static content for ${slug}:`, e);
+        return { post: staticPost, content: 'Content unavailable.' };
+      }
     }
     
     return { post: null, content: '' };
