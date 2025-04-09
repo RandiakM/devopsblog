@@ -15,7 +15,7 @@ export const featuredArticles: Article[] = [
     excerpt: "How to Set Up AWS WAF, CloudFront and an S3 Bucket to serve content securely and Restrict content Access to certain originating sources only. This guide looks at some issues, for instance, 403 Forbidden, in order to troubleshoot the problem.",
     category: "WAF & CloudFront",
     date: "January 7, 2027",
-    image: "/client/public/images/waf-cloudfront-secure.png",
+    image: "/devopsblog/client/public/images/waf-cloudfront-secure.png",
     url: "https://dev.to/randiakm/configuring-aws-waf-cloudfront-and-s3-bucket-for-secure-access-24a3"
   },
   {
