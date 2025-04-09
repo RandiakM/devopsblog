@@ -15,20 +15,24 @@ export default function ArticlePage() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setLoading(true);
-    
-    if (params?.slug) {
-      try {
-        // Get the article and content from our markdown library
-        const { post, content } = getPostBySlug(params.slug);
-        setArticle(post);
-        setContent(content);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching article:', error);
-        setLoading(false);
+    async function fetchArticle() {
+      setLoading(true);
+      
+      if (params?.slug) {
+        try {
+          // Get the article and content from our markdown library
+          const { post, content } = await getPostBySlug(params.slug);
+          setArticle(post);
+          setContent(content);
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching article:', error);
+          setLoading(false);
+        }
       }
     }
+    
+    fetchArticle();
   }, [params?.slug]);
 
   if (!match) {
