@@ -1,6 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { type Topic } from "@/lib/topics";
-import { Link } from "wouter";
 
 interface TopicCardProps {
   topic: Topic;
@@ -9,8 +8,22 @@ interface TopicCardProps {
 export function TopicCard({ topic }: TopicCardProps) {
   const Icon = topic.icon;
   
+  // Map topic IDs to their corresponding category in articles
+  const topicToCategory: Record<string, string> = {
+    'generative-ai': 'AI Models',
+    'computer-vision': 'Computer Vision',
+    'deep-learning': 'Deep Learning',
+    'ai-ethics': 'AI Ethics',
+    'natural-language-processing': 'NLP',
+    'ai-research': 'AI Research'
+  };
+  
+  // Get the category for this topic or use the topic title if no mapping exists
+  const category = topicToCategory[topic.id] || topic.title;
+  
+  // Use a regular a tag with href for query parameters
   return (
-    <Link href={`/topics/${topic.id}`}>
+    <a href={`/articles?category=${encodeURIComponent(category)}`}>
       <Card className="group hover:border-primary/50 transition-colors cursor-pointer h-full bg-[#0F172A]">
         <CardContent className="p-6">
           <div className="flex items-start justify-between mb-4">
@@ -30,6 +43,6 @@ export function TopicCard({ topic }: TopicCardProps) {
           </div>
         </CardContent>
       </Card>
-    </Link>
+    </a>
   );
 }
