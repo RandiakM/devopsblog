@@ -11,7 +11,7 @@ import About from "@/pages/about";
 import NotFound from "@/pages/not-found";
 
 // Get base path from environment variable or use empty string for local development
-const basePath = import.meta.env.VITE_BASE_URL || '';
+const basePath = import.meta.env.VITE_BASE_URL || '/devopsblog';
 
 function Router() {
   return (
@@ -20,6 +20,7 @@ function Router() {
       <Route path="/articles" component={Articles} />
       <Route path="/topics" component={Topics} />
       <Route path="/about" component={About} />
+      {/* External articles are now linked directly */}
       <Route component={NotFound} />
     </Switch>
   );

@@ -2,6 +2,121 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom styles for markdown content */
+.prose-invert {
+  color: #d1d5db;
+}
+
+.prose-invert a {
+  color: theme('colors.primary.DEFAULT');
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.prose-invert a:hover {
+  text-decoration: none;
+}
+
+.prose-invert h1, 
+.prose-invert h2, 
+.prose-invert h3, 
+.prose-invert h4, 
+.prose-invert h5, 
+.prose-invert h6 {
+  color: #fff;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.prose-invert h1 {
+  font-size: 2.25rem;
+  margin-top: 0;
+}
+
+.prose-invert h2 {
+  font-size: 1.875rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.prose-invert h3 {
+  font-size: 1.5rem;
+}
+
+.prose-invert h4 {
+  font-size: 1.25rem;
+}
+
+.prose-invert p {
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+}
+
+.prose-invert blockquote {
+  border-left: 4px solid theme('colors.primary.DEFAULT');
+  padding-left: 1rem;
+  font-style: italic;
+  margin-left: 0;
+  margin-right: 0;
+  background-color: rgba(124, 58, 237, 0.05);
+  padding: 1rem;
+  border-radius: 0.25rem;
+}
+
+.prose-invert ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose-invert ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose-invert li {
+  margin-bottom: 0.5rem;
+}
+
+.prose-invert hr {
+  border-color: rgba(255, 255, 255, 0.1);
+  margin: 2rem 0;
+}
+
+.prose-invert code {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.875rem;
+}
+
+.prose-invert pre {
+  background-color: #1e293b;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.prose-invert pre code {
+  background-color: transparent;
+  padding: 0;
+  color: #e2e8f0;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.prose-invert img {
+  border-radius: 0.5rem;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+}
+
 @layer base {
   * {
     @apply border-border;

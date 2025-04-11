@@ -4,7 +4,7 @@ import { Link } from "wouter";
 export function Navbar() {
   return (
     <nav className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container">
+      <div className="container mx-auto px-4 max-w-7xl">
         <div className="flex h-14 items-center justify-between">
           <Link href="/" className="flex items-center">
             <span className="font-bold text-xl text-primary">NeuralPulse</span>
