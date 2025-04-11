@@ -21,7 +21,7 @@ export function Newsletter() {
             Stay Updated
           </h2>
           <p className="text-muted-foreground mb-8">
-            Subscribe to our newsletter to receive the latest insights on AI advancements, tutorials, and industry news.
+            Subscribe to our newsletter to receive the latest insights on Cloud Technologies, AI advancements, tutorials, and industry news.
           </p>
           <form onSubmit={handleSubmit} className="flex gap-x-4">
             <Input
