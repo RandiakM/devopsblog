@@ -1,6 +1,6 @@
-# NeuralPulse Blog
+# DevOps Blog
 
-A modern, static AI/ML blog website with dark theme and purple accents.
+Deep insights into SRE, DevOps, Cloud Automation, and Reliability Engineering advancements.
 
 ## Development
 
