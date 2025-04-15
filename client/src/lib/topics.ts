@@ -10,8 +10,8 @@ export interface Topic {
 
 export const topics: Topic[] = [
   {
-    id: "waf-cloudfront",
-    title: "WAF & CloudFront",
+    id: "ai-models",
+    title: "AI Models",
     description: "Explore the latest advancements in generative AI models, including GANs, diffusion models, and more.",
     articleCount: 12,
     icon: Brain
