@@ -29,43 +29,43 @@ export const featuredArticles: Article[] = [
   },
   {
     id: 3,
-    title: "The Rise of Multimodal AI Models: Bridging Text, Image, and Beyond",
-    excerpt: "Explore the emergence of multimodal AI models that combine text, image, and video understanding for more comprehensive AI applications.",
-    category: "AI Models",
-    date: "June 15, 2023",
-    image: "/static/images/blog/multimodal-ai.jpg",
-    url: "https://neuralpulse.ai/articles/multimodal-ai-models"
+    title: "Terraform-CodeGen0",
+    excerpt: "A Terraform Code Generator that generates Terraform code for AWS resources based on user input.",
+    category: "Infrastructure as Code",
+    date: "January 12, 2025",
+    image: "/devopsblog/images/terraform-generator.png",
+    url: "https://dev.to/randiakm/terraform-codegen0-a-terraform-code-generator-55aa"
   }
 ];
 
 export const recentArticles: Article[] = [
   {
     id: 4,
-    title: "Advancements in AI-Driven 3D Modeling and Virtual World Creation",
-    excerpt: "Learn how AI is revolutionizing 3D modeling and virtual world creation, enabling creators to build immersive virtual worlds...",
-    category: "3D & Virtual Worlds",
-    date: "July 1, 2023",
-    image: "/static/images/blog/3d-modeling.jpg",
-    url: "https://neuralpulse.ai/articles/ai-driven-3d-modeling"
+    title: "Creating AWS Timestream Database Using A Lambda Function",
+    excerpt: " This guide will walk you through creating a Timestream database and inserting the data from the s3 bucket's Excel file using a Lambda function.",
+    category: "Lambda & Timestream",
+    date: "January 14, 2024",
+    image: "/devopsblog/images/creating-timestream-db-lambda.webp",
+    url: "https://dev.to/randiakm/creating-aws-timestream-database-using-a-lambda-function-2ln2"
   },
   {
     id: 5,
-    title: "The Integration of AI in Wearable Technology: Enhancing Our Daily Lives",
-    excerpt: "Delve into the incorporation of AI into wearable devices, such as smart glasses, smart watches, and integration through...",
-    category: "Wearable Tech",
-    date: "July 5, 2023",
-    image: "/static/images/blog/wearable-tech.jpg",
-    url: "https://neuralpulse.ai/articles/ai-wearable-tech"
-  },
-  {
-    id: 6,
-    title: "Computer Vision in Autonomous Vehicles",
-    excerpt: "Analyzing how computer vision algorithms are working with sensors to help autonomous vehicles navigate complex environments.",
-    category: "Computer Vision",
-    date: "July 8, 2023",
-    image: "/static/images/blog/computer-vision.jpg",
-    url: "https://neuralpulse.ai/articles/computer-vision-autonomous-vehicles"
+    title: "Developing AWS Lambda Functions In Locally",
+    excerpt: "In this article, we are going to learn about Lambda function creating, building, updating, and testing locally.",
+    category: "Serverless & Cloud",
+    date: "January 6, 2024",
+    image: "/devopsblog/images/developing-aws-lambda.png",
+    url: "https://dev.to/randiakm/developing-aws-lambda-functions-locally-4iam"
   }//,
+  // {
+  //   id: 6,
+  //   title: "Computer Vision in Autonomous Vehicles",
+  //   excerpt: "Analyzing how computer vision algorithms are working with sensors to help autonomous vehicles navigate complex environments.",
+  //   category: "Computer Vision",
+  //   date: "July 8, 2023",
+  //   image: "/static/images/blog/computer-vision.jpg",
+  //   url: "https://neuralpulse.ai/articles/computer-vision-autonomous-vehicles"
+  // },
   // {
   //   id: 7,
   //   title: "Deep Learning for Natural Language Processing",

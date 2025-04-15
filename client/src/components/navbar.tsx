@@ -7,15 +7,15 @@ export function Navbar() {
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="flex h-14 items-center justify-between">
           <Link href="/" className="flex items-center">
-            <span className="font-bold text-xl text-primary">NeuralPulse</span>
+            <span className="font-bold text-xl text-primary">CyperNova Blog</span>
           </Link>
           <div className="flex-1 flex justify-center space-x-6 text-sm font-medium">
             <Link href="/articles" className="transition-colors hover:text-primary">
               Articles
             </Link>
-            <Link href="/topics" className="transition-colors hover:text-primary">
+            {/* <Link href="/topics" className="transition-colors hover:text-primary">
               Topics
-            </Link>
+            </Link> */}
             <Link href="/about" className="transition-colors hover:text-primary">
               About
             </Link>
