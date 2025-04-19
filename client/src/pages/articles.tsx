@@ -1,6 +1,9 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { featuredArticles, recentArticles } from "@/lib/articles";
 
+// Declare gtag as a global variable
+declare const gtag: (type: string, eventName: string, params: Record<string, any>) => void;
+
 export default function Articles() {
   // Combine all articles
   const allArticles = [...featuredArticles, ...recentArticles];
@@ -14,6 +17,15 @@ export default function Articles() {
     ? allArticles.filter(article => 
         article.category === categoryFilter)
     : allArticles;
+
+  // Track article clicks
+  const handleArticleClick = (articleTitle: string) => {
+    gtag('event', 'article_click', {
+      event_category: 'Articles',
+      event_label: articleTitle,
+    });
+  };
+  
   
   return (
     <main className="container mx-auto px-4 max-w-7xl py-16">
@@ -51,7 +63,9 @@ export default function Articles() {
               target="_blank" 
               rel="noopener noreferrer" 
               className="block group"
+              onClick={() => handleArticleClick(article.title)}
             >
+              {article.title}
               <Card className="group hover:border-primary/50 transition-colors bg-[#0F172A] h-full">
                 <CardHeader className="p-0">
                   <div className="aspect-video relative overflow-hidden rounded-t-lg">
